@@ -36,24 +36,27 @@
 
 ### 资源：
 1. 关于科普文章。
-   中文的领域科普参见下文：
+
+ 中文的领域科普参见下文：
  - 周明辉,郭长国. 基于大数据的软件工程新思维.中国计算机学会通讯.第10卷,第3期. 2014年3月
  - 周明辉,张伟,尹刚. 开源软件的量化分析.中国计算机学会通讯.第12卷,第2期. 2016年2月
-  英文有相当多一组文章要读。先从下述列表开始：使用数据explore开源开发和全球分布式开发是本领域的pioneer work，需要尤其关注其研究问题和研究方法及其跟软件开发效率和质量的关系：
+ 英文有相当多一组文章要读。先从下述列表开始：使用数据explore开源开发和全球分布式开发是本领域的pioneer work，需要尤其关注其研究问题和研究方法及其跟软件开发效率和质量的关系：
  - A. Mockus, R. T. Fielding, and J. Herbsleb. Two case studies of open source software development: Apache and Mozilla. ACM Transactions on Software Engineering and Methodology, 11(3):1–38, July 2002.
  - J. D. Herbsleb and A. Mockus. An empirical study of speed and communication in globally-distributed software development. IEEE Transactions on Software Engineering, 29(6):481–494, June 2003.
  - A. Mockus and D. M. Weiss. Globalization by chunking: a quantitative approach. IEEE Software, 18(2):30–37, March 2001.
 
 2. 关于数据集。
-   我们可以拿到的（软件开发活动）数据是非常多的，例如互联网上成千上万开源项目的数据都是开放可获取的。这里只举几个例子以供嬉戏。
-   （1）Issue tracking data，即项目中的issue报告和处理流程数据。我们有两份由mozilla社区官方提供的Mozilla Bugzilla dump (分别在2013年和2016年提供)，原始数据如下：
-   pae:/store1/bug/MozDump/Mozilla-Bugzilla-Public-02-January-2013.sql
-   pae:/store/bug//mozilladump20160304/research_bugzilla_2016-03-04.sql.gz
+
+ 我们可以拿到的（软件开发活动）数据是非常多的，例如互联网上成千上万开源项目的数据都是开放可获取的。这里只举几个例子以供嬉戏。
+
+ （1）Issue tracking data，即项目中的issue报告和处理流程数据。我们有两份由mozilla社区官方提供的Mozilla Bugzilla dump (分别在2013年和2016年提供)，原始数据如下：
+ - pae:/store1/bug/MozDump/Mozilla-Bugzilla-Public-02-January-2013.sql
+ - pae:/store/bug//mozilladump20160304/research_bugzilla_2016-03-04.sql.gz
  - 有关数据本身的处理流程，可以参见：Jiaxin Zhu, Minghui Zhou, and Hong Mei. Multi-extract and multi-level dataset of mozilla issue tracking history. In Proceedings of the 13th International Conference on Mining Software Repositories (MSR '16). ACM, New York, NY, USA, 472-475.
  - 有关如何使用这个数据集做研究，可以参见：Minghui Zhou, Audris Mockus: Who Will Stay in the FLOSS Community? Modeling Participant's Initial Behavior. IEEE Transactions on Software Engineering, vol.41, no.1, pp.82-99, Jan. 1 2015.
 
-（2）commits data，即项目开发过程中的代码提交日志。基本上任何一个开源项目都可以先clone到本地然后获取其commit log。下面以linux kernel为例描述日志获取过程：
-```bash
+ （2）commits data，即项目开发过程中的代码提交日志。基本上任何一个开源项目都可以先clone到本地然后获取其commit log。下面以linux kernel为例描述日志获取过程：
+ ```bash
 $git clone git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
 $cd linux
 linux$git log --numstat --pretty=format:"STARTOFTHECOMMIT%n%H;%an;%ae;%ad;%cn;%ce;%cd;%s" > log.linux 
@@ -61,8 +64,8 @@ linux$perl extrgit.perl <log.linux >linux.l1
 linux$cat linux.l1 | while read   
 do perl -ane 'use Time::ParseDate qw(parsedate); ($rev,$aname,$cname,$alogin,$clogin,$nadd,$atime,$ctime,$f,$cmt)=split(/\;/,$_,-1); $at=parsedate("$atime");$ct=parsedate("$ctime"); print "$rev\;$aname\;$cname\;$alogin\;$clogin\;$nadd\;$at\;$ct\;$f\;$cmt"';
 done > linux.l2
-```
-```perl
+ ```
+ ```perl
 ########extrgit.perl#######################
 use strict;
 #Extract each revision from FreeBSD-release/10.2.0 log output. -zhouminghui
@@ -113,10 +116,10 @@ while(<STDIN>){
 
 &output ();
 #########################################################
-```
+ ```
 
-2. 关于开源相关的资源。
+3. 关于开源相关的资源。
  - 北卡罗来纳大学维护的开源资源的主页（https://www.ncsu.edu/it/open_source/），分门别类地索引了开源操作系统、开源书籍、开源应用软件、开源中间件、开源硬件、开源课程、开源出版等资源，为学生、科研与教育工作者们提供了一个利用开源的入口。
  - Schoolforge联盟是一个旨在联合开发、推广开源教育资源的组织的联合体，其所搭建的schoolforge.net（https://schoolforge.net/）平台集合了面向教育的各类开源软件、开源课程、开源教材等资源，为开源教育提供了丰富资源。
 
-3. 关于R语言和Shell脚本。
+4. 关于R语言和Shell脚本。
